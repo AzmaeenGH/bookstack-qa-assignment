@@ -10,4 +10,5 @@ node_modules/
 ## Added
 allure-results/
 allure-report/
+test-results/
 # .env

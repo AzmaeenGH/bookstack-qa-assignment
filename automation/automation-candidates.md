@@ -2,8 +2,13 @@
 
 - **Application**: BookStack Demo (https://demo.bookstackapp.com/)
 - **Tool**: Playwright
+- **Browsers**: Chromium, Firefox, WebKit. 
+
+Run steps: see [README](README.md).
 
 ## AUT-001: Login with valid and invalid credentials
+
+Implemented in: `tests/login.test.js`
 
 Steps:
 1. Open the login page
@@ -26,23 +31,29 @@ Steps:
 
 ## AUT-002: Create a book and check it appears in the book list
 
-Precondition: User is logged in. Book name is unique per run (example: `Book_data_time`).
+Implemented in: `tests/create-book.test.js`
+
+Precondition: User is logged in. Book name is unique per run (example: `Book_<timestamp>`).
 
 | Test case | Input | Steps | Expected result |
 |---|---|---|---|
-| AUT-002-01 | Name only | Go to /create-book, enter name, click "Save Book", go to /books | Book page opens with the name. Name is in the book list. |
-| AUT-002-02 | Name and description | Go to /create-book, enter name and description, click "Save Book", go to /books | Book is created and listed. |
-| AUT-002-03 | Cancel | Go to /create-book, enter name, click "Cancel", go to /books | Book is not in the list. |
+| AUT-002-01 | Name only | Go to /create-book, enter name, click "Save Book", search for the book name | Book page opens with the name. Book is in the search results. |
+| AUT-002-02 | Name and description | Go to /create-book, enter name and description, click "Save Book", search for the book name | Book is created and found in the search results. |
+| AUT-002-03 | Cancel | Go to /create-book, enter name, click "Cancel", search for the book name | Book is not in the search results. |
 | AUT-002-04 | Name + description + 1 tag (name `little`, value `3`) | Go to /create-book, enter name and description, add the tag, click "Save Book" | Book is created. Tag is shown on the book page. |
-| AUT-002-05 | Name + valid cover image (.jpg) | Go to /create-book, enter name, upload the .jpg, click "Save Book" | Book is created with the cover image. |
+| AUT-002-05 | Name + valid cover image (.jpg) | Go to /create-book, enter name, upload the .jpg, click "Save Book" | Book is created. |
 | AUT-002-06 | Empty name | Go to /create-book, leave name empty, click "Save Book" | Book is not created. "The name field is required." |
 | AUT-002-07 | Invalid cover file (.txt) | Go to /create-book, enter name, upload the .txt, click "Save Book" | Book is not created. "The image must have a valid & supported image extension." |
 
-Cleanup: delete the created books after the run.
+Cleanup: delete the created books after each test.
+
+Not asserted: the cover image in AUT-002-05, the description in AUT-002-02 and AUT-002-04, and the tag value in AUT-002-04.
 
 **Why automate**: Creating a book is the main function of the app. Steps are fixed and the page is stable. Good quick check after every update.
 
 ## AUT-003: Book name length boundary
+
+Implemented in: `tests/book-name-length.test.js`
 
 Precondition: User is logged in.
 
@@ -55,9 +66,9 @@ Steps:
 | Test case | Name length | Expected result |
 |---|---|---|
 | AUT-003-01 | 1 | Book is created |
-| AUT-003-02 | 255 | Book is created |
+| AUT-003-02 | 255 | Book is created with the 255-character name. Actual: saved as 191 characters (BUG-002). Automated as expected failure. |
 | AUT-003-03 | 256 | Not created. "The name may not be greater than 255 characters." |
 
-Cleanup: delete the created books after the run.
+Cleanup: delete the created books after each test.
 
 **Why automate**: Typing and counting 255 and 256 characters by hand is slow and easy to get wrong. A script creates the exact length every time. Good for catching changes to the validation rule.

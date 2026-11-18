@@ -18,8 +18,8 @@ Software quality assurance assignment on the BookStack demo application.
 | | Count |
 |---|---|
 | Test cases written and executed | 31 |
-| Passed | 29 |
-| Failed | 2 |
+| Passed | 28 |
+| Failed | 3 |
 | Bugs reported | 1 |
 | Scenarios selected for automation | 3 |
 

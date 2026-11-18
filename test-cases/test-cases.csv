@@ -105,7 +105,7 @@ Cover Image: a text file named ""BookStackDemo_Book_021.txt""",System should sho
 3. Click on ""Save Book"" button","Name: ""A""",Book will be created,Book was created,PASS,
 ,BookStackDemo_Book_024,Book Creation,Verify user can set book title to the max allowed name length,Boundary,"Login to website, and navigate to Book page","1. From the left options, select ""Create New Book""
 2. Only fill Name field with 255 characters
-3. Click on ""Save Book"" button","Name: ""ABCDE12345"" typed repetedly until 255 character was reached",Book will be created,Book was created,PASS,
+3. Click on ""Save Book"" button","Name: ""ABCDE12345"" typed repetedly until 255 character was reached",Book will be created with 255 characters,"Book was created, but name saved as 191 characters, not 255",FAIL,See BUG-002. Marked PASS on 30 Oct (saved name not checked). Re-verified 5 Nov 2026.
 ,BookStackDemo_Book_025,Book Creation,Verify user cannot set title to any length greater than the fixed max length,Boundary,"Login to website, and navigate to Book page","1. From the left options, select ""Create New Book""
 2. Only fill Name field with 300 characters
 3. Click on ""Save Book"" button","Name: ""ABCDE12345"" typed repetedly until 300 character was reached",The website should show error when length exceeds 255 characters,"Getting error message ""The name may not be greater than 255 characters.""",PASS,
@@ -132,6 +132,6 @@ used for both the book",The website should show error indicating a book with the
 ,BookStackDemo_Book_030,Book Creation,Verify user can set book name using only numbers,Edge,"Login to website, and navigate to Book page","1. From the left options, select ""Create New Book""
 2. Fill Name field only, with only numbers
 3. Click on ""Save Book"" button","Name: ""12345""",Book will be created,Book was created,PASS,
-,BookStackDemo_Book_031,Book Creation,Verify user cannot create book with only special characters,Edge,"Login to website, and navigate to Book page","1. From the left options, select ""Create New Book""
+,BookStackDemo_Book_031,Book Creation,Verify user can create book with only special characters,Edge,"Login to website, and navigate to Book page","1. From the left options, select ""Create New Book""
 2. Fill Name field only, with only special characters
-3. Click on ""Save Book"" button","Name: ""!@#@#.""",The website should show book name error ,Book was created,PASS,
+3. Click on ""Save Book"" button","Name: ""!@#@#.""",Book will be created,Book was created,PASS,

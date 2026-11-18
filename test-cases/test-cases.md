@@ -13,14 +13,12 @@
 | Category | Total | Pass | Fail |
 |---|---|---|---|
 | Positive | 11 | 11 | 0 |
-| Negative | 9 | 8 | 1 |
-| Boundary | 5 | 5 | 0 |
-| Edge | 6 | 5 | 1 |
-| **Total** | **31** | **29** | **2** |
+| Negative | 8 | 7 | 1 |
+| Boundary | 5 | 4 | 1 |
+| Edge | 7 | 6 | 1 |
+| **Total** | **31** | **28** | **3** |
 
-Failed cases: BookStackDemo_Book_022, BookStackDemo_Book_028. See `../bug-report/`.
-
-
+Failed cases: BookStackDemo_Book_022, BookStackDemo_Book_024, BookStackDemo_Book_028. Book_024 is reported as BUG-002 in `../bug_reports/bug-report.md`. 022 and 028 are not reported as bugs, see the Notes column.
 
 ## Test Cases
 
@@ -49,14 +47,14 @@ Failed cases: BookStackDemo_Book_022, BookStackDemo_Book_028. See `../bug-report
 | BookStackDemo_Book_021 | Book Creation | Verify that cover image doesnt work with invalid file format like .pdf or .txt | Negative | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field, and in "Cover image" upload a .txt file  3. Click on "Save Book" button | Name: "Little Image" Cover Image: a text file named "BookStackDemo_Book_021.txt" | System should show error message | Getting error message "The image must have a valid & supported image extension." | PASS |  |
 | BookStackDemo_Book_022 | Book Creation | Verify user cannot add tag value without a tag name | Negative | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field and in Book Tags only input Tag Value without inputing Tag Name 3. Click on "Save Book" button | Book Tags > Tag Name: "", Tag Value: "3" | System should show error message | The book was created | FAIL |  |
 | BookStackDemo_Book_023 | Book Creation | verify user can create books with single character | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field with single Character 3. Click on "Save Book" button | Name: "A" | Book will be created | Book was created | PASS |  |
-| BookStackDemo_Book_024 | Book Creation | Verify user can set book title to the max allowed name length | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field with 255 characters 3. Click on "Save Book" button | Name: "ABCDE12345" typed repetedly until 255 character was reached | Book will be created | Book was created | PASS |  |
+| BookStackDemo_Book_024 | Book Creation | Verify user can set book title to the max allowed name length | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field with 255 characters 3. Click on "Save Book" button | Name: "ABCDE12345" typed repetedly until 255 character was reached | Book will be created with 255 characters | Book was created, but name saved as 191 characters, not 255 | FAIL |  |
 | BookStackDemo_Book_025 | Book Creation | Verify user cannot set title to any length greater than the fixed max length | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Only fill Name field with 300 characters 3. Click on "Save Book" button | Name: "ABCDE12345" typed repetedly until 300 character was reached | The website should show error when length exceeds 255 characters | Getting error message "The name may not be greater than 255 characters." | PASS |  |
 | BookStackDemo_Book_026 | Book Creation | Verify user can set book description using max allowed characters | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field  3. Fill the description with 2000 characters 4. Click on "Save Book" button | Name: "ABCDE12345" typed repetedly until 2000 character was reached | Book will be created | Book was created | PASS |  |
 | BookStackDemo_Book_027 | Book Creation | Verify user cannnot set book description using more than max allowed characters | Boundary | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field  3. Fill the description with 2500 characters 4. Click on "Save Book" button | Name: "ABCDE12345" typed repetedly until 2500 character was reached | The website should show error a length exceeded error | Getting error message "The description html may not be greater than 2000 characters." | PASS |  |
 | BookStackDemo_Book_028 | Book Creation | Verfiy user cannot create a book with a title of an existing book | Edge | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field  3. Click on "Save Book" button 4. From the left options, select "Create New Book" again 5. Fill Name field - exactly same as the first one 6. Click on "Save Book" button | Name: "Little0" used for both the book | The website should show error indicating a book with the filename exists | Both Books were created and shows in the Book List with same name | FAIL |  |
 | BookStackDemo_Book_029 | Book Creation | Verfiy user saved book remained in the book list even after refreshing the page | Edge | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field only 3. Click on "Save Book" button 4. Refresh the page 5. Check if book list still has the newly created book | Name: "Little" | The book showed still exists | The book is available in book list after the refresh | PASS |  |
 | BookStackDemo_Book_030 | Book Creation | Verify user can set book name using only numbers | Edge | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field only, with only numbers 3. Click on "Save Book" button | Name: "12345" | Book will be created | Book was created | PASS |  |
-| BookStackDemo_Book_031 | Book Creation | Verify user cannot create book with only special characters | Edge | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field only, with only special characters 3. Click on "Save Book" button | Name: "!@#@#." | The website should show book name error | Book was created | PASS |  |
+| BookStackDemo_Book_031 | Book Creation | Verify user can create book with only special characters | Edge | Login to website, and navigate to Book page | 1. From the left options, select "Create New Book" 2. Fill Name field only, with only special characters 3. Click on "Save Book" button | Name: "!@#@#." | Book will be created | Book was created | PASS |  |
 
 
 

@@ -1,6 +1,6 @@
 # BookStack QA Assignment
 
-Software quality assurance assignment on the BookStack demo application.
+QA project on the BookStack demo application, completed as an assignment for an Ostad SQA course.
 
 - **Application**: BookStack Demo (https://demo.bookstackapp.com/)
 - **Feature tested**: Create Book (with Login as precondition)
